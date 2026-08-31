@@ -1,3 +1,5 @@
+/* eslint-disable no-unassigned-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /**
  * <h3>JavaScript Datatypes</h3>
  * JavaScript에 8개의 데이터 타입이 있다.
