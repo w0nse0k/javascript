@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>랜덤 팀 나누기</title>
+    <style>
+      :root {
+        --ink: #17202a;
+        --muted: #68737f;
+        --line: #d9e0e7;
+        --paper: #f5f7f9;
+        --panel: #ffffff;
+        --accent: #075985;
+        --accent-light: #e0f2fe;
+        --yellow: #fef3c7;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--paper);
+        font-family: "Noto Sans KR", "Malgun Gothic", sans-serif;
+      }
+
+      header {
+        display: flex;
+        align-items: baseline;
+        gap: 1rem;
+        padding: 0.7rem 4vw;
+        border-bottom: 1px solid var(--line);
+        background: var(--panel);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(1.4rem, 2.5vw, 2rem);
+        letter-spacing: 0;
+      }
+      .subtitle {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      main {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        min-height: calc(100vh - 72px);
+        padding: 1rem 4vw 1.5rem;
+      }
+
+      .input-panel,
+      .results-panel {
+        min-width: 0;
+        padding: 1rem;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+      }
+
+      .panel-heading {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+      h2 {
+        margin: 0 0 1rem;
+        font-size: 1.5rem;
+      }
+      .count {
+        color: var(--accent);
+        font-size: 1rem;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      label,
+      legend {
+        display: block;
+        margin-bottom: 0.45rem;
+        font-size: 1.05rem;
+        font-weight: 700;
+      }
+      textarea {
+        display: block;
+        width: 100%;
+        min-height: 220px;
+        resize: vertical;
+        padding: 0.9rem;
+        border: 2px solid var(--line);
+        border-radius: 6px;
+        color: var(--ink);
+        font: inherit;
+        font-size: 1.2rem;
+        line-height: 1.65;
+      }
+      textarea:focus,
+      input:focus {
+        outline: 3px solid #bae6fd;
+        border-color: var(--accent);
+      }
+      .hint {
+        margin: 0.5rem 0 1.3rem;
+        color: var(--muted);
+        font-size: 0.98rem;
+      }
+      fieldset {
+        margin: 1rem 0 0;
+        padding: 0;
+        border: 0;
+      }
+      .mode-buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.6rem;
+      }
+      .mode-buttons label {
+        margin: 0;
+      }
+      .mode-buttons input {
+        position: absolute;
+        opacity: 0;
+      }
+      .mode-buttons span {
+        display: block;
+        padding: 0.75rem 0.5rem;
+        border: 2px solid var(--line);
+        border-radius: 6px;
+        text-align: center;
+        cursor: pointer;
+        font-size: 1.05rem;
+      }
+      .mode-buttons input:checked + span {
+        border-color: var(--accent);
+        color: var(--accent);
+        background: var(--accent-light);
+      }
+      .number-row {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        margin-top: 1rem;
+      }
+      input[type="number"] {
+        width: 100px;
+        padding: 0.55rem;
+        border: 2px solid var(--line);
+        border-radius: 6px;
+        font: inherit;
+        font-size: 1.2rem;
+      }
+
+      button {
+        width: 100%;
+        margin-top: 1.5rem;
+        padding: 0.9rem 1rem;
+        border: 0;
+        border-radius: 6px;
+        color: white;
+        background: var(--accent);
+        cursor: pointer;
+        font: inherit;
+        font-size: 1.25rem;
+        font-weight: 700;
+      }
+      button:hover {
+        background: #0c4a6e;
+      }
+
+      .results-heading {
+        margin-bottom: 0.8rem;
+      }
+      .results-panel {
+        width: 100%;
+      }
+      .teams {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+        gap: 0.25rem;
+        align-items: start;
+      }
+      .team {
+        min-width: 0;
+        overflow: hidden;
+        border: 1px solid #cbd5e1;
+        border-radius: 4px;
+        background: #fff;
+      }
+      .team h3 {
+        min-width: 0;
+        margin: 0;
+        padding: 0.25rem 0.4rem;
+        background: var(--yellow);
+        font-size: 1rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .team-members {
+        display: grid;
+        grid-template-columns: 1fr;
+        min-width: 0;
+        gap: 0 0.5rem;
+        margin: 0;
+        padding: 0.2rem 0.4rem 0.25rem;
+        font-size: clamp(1.35rem, 2.2vw, 1.7rem);
+        line-height: 1.4;
+      }
+      .team-members span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .team small {
+        font-size: 0.8em;
+        font-weight: 400;
+      }
+      .empty {
+        margin: 0;
+        color: var(--muted);
+        font-size: 1.2rem;
+      }
+      .shuffle-animation {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        color: var(--accent);
+        font-size: 1.35rem;
+        font-weight: 700;
+      }
+      .shuffle-bars {
+        display: flex;
+        align-items: center;
+        gap: 0.2rem;
+        height: 1.6rem;
+      }
+      .shuffle-bars span {
+        display: block;
+        width: 0.3rem;
+        height: 0.8rem;
+        border-radius: 2px;
+        background: var(--accent);
+        animation: shuffle-wave 0.8s ease-in-out infinite;
+      }
+      .shuffle-bars span:nth-child(2) {
+        animation-delay: 0.12s;
+      }
+      .shuffle-bars span:nth-child(3) {
+        animation-delay: 0.24s;
+      }
+      .shuffle-bars span:nth-child(4) {
+        animation-delay: 0.36s;
+      }
+      @keyframes shuffle-wave {
+        0%,
+        100% {
+          height: 0.8rem;
+          opacity: 0.45;
+        }
+        50% {
+          height: 1.6rem;
+          opacity: 1;
+        }
+      }
+
+      @media (max-width: 760px) {
+        header {
+          padding: 0.65rem 1rem;
+        }
+        header .subtitle {
+          display: none;
+        }
+        main {
+          grid-template-columns: 1fr;
+          padding: 1rem;
+        }
+        .input-panel {
+          order: 1;
+        }
+        .results-panel {
+          order: 2;
+          width: 100%;
+        }
+        .team {
+          width: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>랜덤 팀 나누기</h1>
+      <p class="subtitle">
+        이름을 입력하고 원하는 방식으로 팀을 만들어 보세요.
+      </p>
+    </header>
+
+    <main>
+      <section class="input-panel" aria-labelledby="input-title">
+        <div class="panel-heading">
+          <h2 id="input-title">이름 목록</h2>
+          <span class="count" id="person-count">0명</span>
+        </div>
+        <label for="names">이름 입력</label>
+        <textarea
+          id="names"
+          placeholder="예: 민수 영희 철수 지수 ...&#10;한 줄에 입력한 이름은 서로 다른 팀에 배정됩니다."
+        ></textarea>
+        <p class="hint">
+          이름은 스페이스나 쉼표로 구분합니다. 같은 줄의 이름들은 서로 다른 팀에
+          배정됩니다.
+        </p>
+
+        <fieldset>
+          <legend>분배 방식</legend>
+          <div class="mode-buttons">
+            <label
+              ><input type="radio" name="mode" value="teams" checked /><span
+                >팀 수로 나누기</span
+              ></label
+            >
+            <label
+              ><input type="radio" name="mode" value="members" /><span
+                >팀별 인원으로 나누기</span
+              ></label
+            >
+          </div>
+          <div class="number-row">
+            <label for="amount" id="amount-label">팀 수</label>
+            <input
+              id="amount"
+              type="number"
+              min="1"
+              max="100"
+              value="4"
+              inputmode="numeric"
+            />
+            <span id="amount-unit">팀</span>
+          </div>
+        </fieldset>
+        <button id="shuffle" type="button">섞어서 팀 만들기</button>
+      </section>
+
+      <section class="results-panel" aria-labelledby="results-title">
+        <div class="panel-heading results-heading">
+          <h2 id="results-title">팀 배정 결과</h2>
+          <span class="count" id="result-summary">팀을 만들어 주세요</span>
+        </div>
+        <div class="teams" id="teams" aria-live="polite">
+          <p class="empty">왼쪽에 이름을 입력한 뒤 버튼을 눌러 주세요.</p>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const namesInput = document.querySelector("#names");
+      const personCount = document.querySelector("#person-count");
+      const amount = document.querySelector("#amount");
+      const amountLabel = document.querySelector("#amount-label");
+      const amountUnit = document.querySelector("#amount-unit");
+      const teamsOutput = document.querySelector("#teams");
+      const resultSummary = document.querySelector("#result-summary");
+      const shuffleButton = document.querySelector("#shuffle");
+
+      function getNames() {
+        return namesInput.value
+          .split("\n")
+          .flatMap((line) => line.trim().split(/[\s,]+/))
+          .filter(Boolean);
+      }
+
+      function getRestrictedGroups() {
+        return namesInput.value
+          .split("\n")
+          .map((line) =>
+            line
+              .trim()
+              .split(/[\s,]+/)
+              .filter(Boolean),
+          )
+          .filter((group) => group.length > 1);
+      }
+
+      function updateCount() {
+        const names = getNames();
+        personCount.textContent = `${names.length}명`;
+      }
+
+      function updateModeLabel(event) {
+        const membersMode = event.target.value === "members";
+        amountLabel.textContent = membersMode ? "팀별 인원" : "팀 수";
+        amountUnit.textContent = membersMode ? "명" : "팀";
+        amount.value = membersMode ? 4 : 4;
+      }
+
+      function shuffle(items) {
+        for (let index = items.length - 1; index > 0; index -= 1) {
+          const randomIndex = Math.floor(Math.random() * (index + 1));
+          [items[index], items[randomIndex]] = [
+            items[randomIndex],
+            items[index],
+          ];
+        }
+        return items;
+      }
+
+      function makeTeams(names, teamCount, restrictedGroups) {
+        const teams = Array.from({ length: teamCount }, () => []);
+        const groupedNames = new Set(restrictedGroups.flat());
+        const ungroupedNames = names.filter((name) => !groupedNames.has(name));
+        const groups = restrictedGroups.map((group) => shuffle([...group]));
+        if (ungroupedNames.length) groups.push(shuffle(ungroupedNames));
+
+        groups
+          .sort((first, second) => second.length - first.length)
+          .forEach((group) => {
+            group.forEach((name) => {
+              const groupTeams = teams.map((team, index) => ({
+                index,
+                size: team.length,
+                conflict: group.some((groupName) => team.includes(groupName)),
+              }));
+              const bestConflict = Math.min(
+                ...groupTeams.map((team) => Number(team.conflict)),
+              );
+              const candidates = groupTeams
+                .filter((team) => Number(team.conflict) === bestConflict)
+                .sort((first, second) => first.size - second.size);
+              teams[candidates[0].index].push(name);
+            });
+          });
+        return teams;
+      }
+
+      async function createTeams() {
+        const names = getNames();
+        const restrictedGroups = getRestrictedGroups();
+        const value = Math.max(1, Number.parseInt(amount.value, 10) || 1);
+        const membersMode =
+          document.querySelector('input[name="mode"]:checked').value ===
+          "members";
+        if (!names.length) {
+          teamsOutput.innerHTML =
+            '<p class="empty">먼저 이름을 입력해 주세요.</p>';
+          resultSummary.textContent = "입력 필요";
+          return;
+        }
+
+        const teamCount = membersMode
+          ? Math.ceil(names.length / value)
+          : Math.min(value, names.length);
+        const teams = makeTeams(names, teamCount, restrictedGroups);
+        shuffleButton.disabled = true;
+        teamsOutput.innerHTML =
+          '<div class="shuffle-animation" role="status"><span>팀을 섞는 중</span><span class="shuffle-bars"><span></span><span></span><span></span><span></span></span></div>';
+        resultSummary.textContent = "준비 중";
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        teamsOutput.replaceChildren();
+        teams.forEach((members, index) => {
+          const team = document.createElement("article");
+          team.className = "team";
+          team.innerHTML = `<h3>${index + 1}팀 <small>(${members.length}명)</small></h3>`;
+          const list = document.createElement("div");
+          list.className = "team-members";
+          members.forEach((member) => {
+            const item = document.createElement("span");
+            item.textContent = member;
+            list.append(item);
+          });
+          team.append(list);
+          teamsOutput.append(team);
+        });
+        resultSummary.textContent = `${teamCount}팀 · ${names.length}명`;
+        shuffleButton.disabled = false;
+      }
+
+      namesInput.addEventListener("input", updateCount);
+      document
+        .querySelectorAll('input[name="mode"]')
+        .forEach((radio) => radio.addEventListener("change", updateModeLabel));
+      shuffleButton.addEventListener("click", createTeams);
+      updateCount();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+  <body>
+    <h1>Event Handling</h1>
+    <p id="msg"></p>
+    <button id="btn">Say Hello</button>
+    <script>
+      document.getElementById("btn").addEventListener("click", () => {
+        document.getElementById("msg").innerHTML = "Hello World";
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+  <body>
+    <h1>This</h1>
+    <p id="msg"></p>
+    <button id="btn1">Regualar Function</button
+    ><button id="btn2">Arrow Function</button>
+    <script>
+      const msg = document.getElementById("msg");
+      document.getElementById("btn1").addEventListener("click", function () {
+        msg.innerHTML = this; // 이벤트를 발생시킨 버튼
+      });
+      document.getElementById("btn2").addEventListener("click", () => {
+        msg.innerHTML = this; // 이 함수의 소유자. Window
+      });
+    </script>
+  </body>
+</html>
