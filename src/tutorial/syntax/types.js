@@ -1,7 +1,6 @@
 /**
  * <h3>JavaScript Datatypes</h3>
  * JavaScript에 8개의 데이터 타입이 있다.
- * 7 primitive types and object type
  * 1. string
  * 2. number
  * 3. boolean
