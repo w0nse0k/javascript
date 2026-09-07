@@ -3,6 +3,17 @@
  * @module
  * @see https://www.w3schools.com/js/js_function_arguments.asp
  */
+console.log(sumAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)); // 55
+
+// arguments : 함수의 매개변수로 전달된 값들을 배열처럼 사용하는 객체
+function sumAll() {
+  let sum = 0;
+  for (let i = 0; i < arguments.length; i++) {
+    sum += arguments[i];
+  }
+  return sum;
+}
+
 // Function Rest Parameters
 function sum(...args) {
   let sum = 0;

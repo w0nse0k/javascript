@@ -6,10 +6,10 @@
  * 1. string
  * 2. number
  * 3. boolean
- * 4. bigint
- * 5. undefined
- * 6. null
- * 7. symbol
+ * 4. bigint : bigint은 정수만 표현 가능하며, 2^53-1보다 큰 정수를 표현할 수 있다.
+ * 5. undefined: undefined은 아직 할당되지 않은 변수의 값이다.
+ * 6. null: null은 object로 취급된다.
+ * 7. symbol: symbol은 고유하고 변경 불가능한 primitive 값이다.
  * 8. object
  * @module
  * @see https://www.w3schools.com/js/js_types.asp

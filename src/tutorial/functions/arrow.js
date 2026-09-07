@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /**
  * <h3>Arrow Functions</h3>
  * (Lambda Functions, Lambda Expressions)
@@ -32,4 +33,4 @@ console.log(hello2("Jacob"));
 // hello1과 hello2 기능을 하나로
 const hello3 = (val = "World") => "Hello " + val;
 console.log(hello3());
-console.log(hello3("Rachel"));
+console.log(hello3("Jacob"));

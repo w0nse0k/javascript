@@ -9,7 +9,7 @@
  */
 
 // Function Expression. anonymous함수를 변수에 할당
-const multiply = function a(a, b) {
+const multiply = function (a, b) {
   return a * b;
 };
 
@@ -26,7 +26,7 @@ const sayHello = function () {
 
 run(sayHello); // Hello
 
+// anonymous function을 인자로 넣는다.
 run(function () {
-  // anonymous function을 인자로 넣는다.
   return "Hello from anonymous function";
 });
