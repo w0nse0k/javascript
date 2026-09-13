@@ -16,6 +16,10 @@ for (let x in person) {
 }
 console.log(text);
 
+// Object.values()
+const myArray = Object.values(person);
+console.log(myArray); // ["John", 30, "New York"]
+
 // entry 배열. entry: [name, value]
 const myEntries = Object.entries(person);
 console.log(myEntries);
@@ -25,11 +29,11 @@ for (const entry of myEntries) {
   console.log(entry);
 }
 
-// forEach() 함수로 entry 순환
-myEntries.forEach((entry) => console.log(entry));
-
 text = "";
 for (const [name, value] of Object.entries(person)) {
   text += `${name} : '${value}'\n`;
 }
 console.log(text);
+
+// JSON.stringify()
+console.log(JSON.stringify(person));

@@ -19,30 +19,26 @@ console.log(person.firstName);
 
 // bracket notation
 console.log(person["age"]);
-let n1 = "firstName";
 
 // bracket notation은 property에 변수를 쓸 수 있다.
-console.log(person[n1]);
-n1 = "lastName";
-console.log(person[n1]);
-
+const n1 = "firstName";
+const n2 = "lastName";
+console.log(person[n1], person[n2]);
 console.log(person.n1); // undefined. n1이라는 properties는 없다.
 
 // changing properties
 person.age = 10;
-console.log(person);
 
 // adding properties
 person.nationality = "English";
-console.log(person);
 
 // deleting properties
 delete person.age;
 console.log(person);
 
 // Check if a Property Exists. 연산자 in
-console.log("firstName" in person);
-console.log("age" in person);
+console.log("firstName" in person); // true
+console.log("age" in person); // false
 
 // Nested Objects
 const myObj = {

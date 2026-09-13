@@ -34,3 +34,22 @@ console.log(hello2("Jacob"));
 const hello3 = (val = "World") => "Hello " + val;
 console.log(hello3());
 console.log(hello3("Jacob"));
+
+// object method with function expression
+const person1 = {
+  name: "John",
+  greet: function () {
+    console.log(this.name);
+  },
+};
+
+// object method with arrow function. this를 binding 하지 않는다.
+const person2 = {
+  name: "John",
+  greet: () => {
+    console.log(this);
+  },
+};
+
+person1.greet();
+person2.greet();

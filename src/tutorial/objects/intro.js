@@ -22,14 +22,15 @@ const person1 = {
 };
 console.log(person1);
 
-// Create an Object
+// create an object
 const person2 = {};
 
-// Add Properties
-person2.firstName = "John";
-person2.lastName = "Doe";
+// add properties later
+person2.firstName = "John"; // dot notation
+person2["lastName"] = "Doe"; // bracket notation
 person2.age = 50;
 person2.eyeColor = "blue";
+console.log(person2);
 
 // object methods
 const person3 = {

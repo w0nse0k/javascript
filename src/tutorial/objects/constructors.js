@@ -1,5 +1,7 @@
 /**
  * <h3>JavaScript Object Constructors</h3>
+ * 같은 타입으로 여러개의 object를 만들때 사용한다.
+ * object constructor function은 첫 글자를 대문자로 쓴다.
  * @module
  * @see https://www.w3schools.com/js/js_object_constructors.asp
  */
