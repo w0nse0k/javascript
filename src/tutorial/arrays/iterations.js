@@ -11,31 +11,26 @@ let text = "";
 for (let i = 0; i < cars.length; i++) {
   text += cars[i] + ",";
 }
-console.log(text);
+console.log(text); // BMW,Volvo,Mini,
 
 // for ... of. elements를 순회한다.
 text = "";
 for (let x of cars) {
   text += x + ",";
 }
-console.log(text);
-
-// for ... in. index를 순회한다.
-text = "";
-for (let x in cars) {
-  text += cars[x] + ",";
-}
-console.log(text);
+console.log(text); // BMW,Volvo,Mini,
 
 // forEach()
 text = "";
-cars.forEach((value) => {
-  text += value + ",";
-});
-console.log(text);
+cars.forEach((value) => (text += value + ","));
+console.log(text); // BMW,Volvo,Mini,
 
 // map()
 const newCars = cars.map((value) => `<li>${value}</li>`);
-console.log(newCars);
+console.log(newCars); // ["<li>BMW</li>", "<li>Volvo</li>", "<li>Mini</li>"]
 text = `<ul>${newCars.join("")}</ul>`;
 console.log(text);
+
+// fiter()
+
+// reduce()
