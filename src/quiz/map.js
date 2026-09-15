@@ -13,5 +13,5 @@ const numbers2 = map(numbers, (elem) => elem * 2);
 console.log(numbers2);
 
 const cars = ["BMW", "Volvo", "Merdeces"];
-const carsList = map(cars, (elem) => `<li>${elem}</li>`);
-console.log(`<ul>${carsList.join("")}</ul>`);
+const carsHtml = map(cars, (elem) => `<li>${elem}</li>`).join("");
+console.log(carsHtml);
