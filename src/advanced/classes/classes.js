@@ -1,5 +1,6 @@
 /**
  * <h3>JavaScript Classes</h3>
+ * 클래스는 constructor 함수와 prototype에 메서드를 만드는 문법이다.
  * @module
  * @see https://www.w3schools.com/js/js_classes.asp
  */
@@ -19,18 +20,3 @@ const myCar = new Car("Ford", 2014);
 console.log(myCar);
 console.log(Object.getPrototypeOf(myCar));
 console.log(myCar.age());
-
-// inheritance
-class Model extends Car {
-  constructor(brand, year, model) {
-    super(brand, year);
-    this.model = model;
-  }
-  show() {
-    return this.present() + ", it is a " + this.model;
-  }
-}
-
-let yourCar = new Model("Ford", "2014", "Mustang");
-console.log(yourCar);
-console.log(Object.getPrototypeOf(yourCar));
