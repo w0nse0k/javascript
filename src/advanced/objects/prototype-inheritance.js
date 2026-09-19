@@ -1,5 +1,5 @@
 /**
- * <h3>Prototypes Details</h3>
+ * <h3>Prototypes Inheritance</h3>
  * @module
  */
 function Animal(name) {

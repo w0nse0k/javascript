@@ -2,6 +2,8 @@
  * <h3>JavaScript Object Prototypes</h3>
  * @module
  * @see https://www.w3schools.com/js/js_object_prototypes.asp
+ * JavaScript object는 properties와 methods를 찾을 때 prototype chain을 따라서 올라간다.
+ * Object.prototype이 prototype 상속 체인의 최상단 오브젝트이다.
  */
 // object constructor
 function Person(first, last, age, eyecolor) {
@@ -28,5 +30,9 @@ console.log(myMother.name());
 
 const prototype1 = Object.getPrototypeOf(myFather);
 const prototype2 = Object.getPrototypeOf(myMother);
+
 console.log(prototype1 === prototype2);
-console.log(prototype1);
+console.log(prototype1 === Person.prototype);
+
+console.log(Person.prototype.constructor === Person);
+console.log(myFather.constructor === Person);
