@@ -5,8 +5,6 @@
  * @see https://www.w3schools.com/js/js_function_call.asp
  */
 const person = {
-  firstName: "Ana",
-  lastName: "Armas",
   fullName: function () {
     return `${this.firstName} ${this.lastName}`;
   },
@@ -15,15 +13,20 @@ const person = {
     return `${this.firstName} ${this.lastName} in ${city}`;
   },
 };
+
 const person1 = {
   firstName: "John",
   lastName: "Doe",
 };
 
-// This will return "John Doe":
-console.log(person.fullName());
-console.log(person.fullName.call(person1));
+const person2 = {
+  firstName: "Mary",
+  lastName: "Doe",
+};
+
+console.log(person.fullName.call(person1)); // John Doe
+console.log(person.fullName.call(person2)); // Mary Doe
 
 // The call() Method with Arguments
-console.log(person.fullNameWithCity("Seoul"));
 console.log(person.fullNameWithCity.call(person1, "Seoul"));
+console.log(person.fullNameWithCity.call(person2, "Oslo"));
