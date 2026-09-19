@@ -11,13 +11,7 @@ const person = {
 
 // Destructuring
 let { firstName, lastName } = person;
-
 console.log(firstName, lastName);
-
-// String Destructuring
-let name = "W3Schools";
-let [a1, a2, a3] = name;
-console.log(a1, a2, a3);
 
 // Skipping Array Values
 const fruits = ["Bananas", "Oranges", "Apples", "Mangos"];
