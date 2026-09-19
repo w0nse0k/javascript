@@ -14,12 +14,12 @@ function func1(x, y) {
   return x * y;
 }
 
-// function expression (anonymous)
+// function expression
 const func2 = function (x, y) {
   return x * y;
 };
 
-// function expression (arrow)
+// arrow function
 const func3 = (x, y) => x * y;
 
 console.log(func2(4, 5));
