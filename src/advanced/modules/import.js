@@ -4,15 +4,15 @@
  * @see https://www.w3schools.com/js/js_modules_import.asp
  */
 // names imports
-import { name, age } from "./person.js";
+import { name, age } from "./export/person.js";
 // default imports
-import message from "./message.js";
+import message from "./export/message.js";
 // combining Default + Named
-import parse, { validate, format } from "./parser.js";
+import parse, { validate, format } from "./export/parser.js";
 // rename named imports
-import { add as addition } from "./math_module.js";
+import { add as addition } from "./export/math.js";
 // rename default imports (from single default exports)
-import text from "./message.js";
+import text from "./export/message.js";
 
 console.log(name, age);
 console.log(message());

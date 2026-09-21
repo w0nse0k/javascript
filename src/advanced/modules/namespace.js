@@ -4,7 +4,7 @@
  * @see https://www.w3schools.com/js/js_modules_namespace.asp
  */
 // creates namespace object by importing all
-import * as math from "./math_module.js";
+import * as math from "./export/math.js";
 
 console.log(math.PI);
 const result1 = math.add(2, 3);

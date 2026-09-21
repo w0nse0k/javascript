@@ -5,7 +5,7 @@
  */
 async function run() {
   // JavaScript Dynamic Import (load JavaScript modules at runtime)
-  const module = await import("./math_module.js");
+  const module = await import("./export/math.js");
   const result = module.add(2, 3);
   console.log(result);
 }
