@@ -15,24 +15,24 @@ async와 await 키워드는 Promise 기반의 코드를 더 읽기 쉽게 만들
  * @see https://www.w3schools.com/js/js_async_await.asp
  */
 // promise
-const hello = () =>
+const helloPromise = () =>
   new Promise((resolve) => {
-    const message = "Hello World";
+    const message = "Hello Promise";
     resolve(message);
   });
 
 // then()
-hello().then((value) => console.log(value));
+helloPromise().then((value) => console.log(value));
 
-// async fuction은 promise를 return 한다. hello와 동일한 함수
-async function hello2() {
-  return "Hello World";
+// async fuction은 promise를 return 한다. helloPromise와 동일한 함수
+async function helloAsync() {
+  return "Hello Async";
 }
-hello2().then((value) => console.log(value));
+helloAsync().then((value) => console.log(value));
 
 // await
 async function sayHello() {
-  const result = await hello2(); // await는 async 함수 내부에서만 사용
+  const result = await helloAsync(); // await는 async 함수 내부에서만 사용
   console.log(result);
 }
 sayHello();

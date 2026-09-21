@@ -29,23 +29,3 @@ async function loadCustomer() {
 
 // Call the async function
 loadCustomer();
-
-// Async function to download files
-async function loadData() {
-  const [customerResponse, productsResponse, newsResponse] = await Promise.all([
-    fetch("https://www.w3schools.com/js/customer.json"),
-    fetch("https://www.w3schools.com/js/products.json"),
-    fetch("https://www.w3schools.com/js/news.json"),
-  ]);
-  const [customer, products, news] = await Promise.all([
-    await customerResponse.json(),
-    await productsResponse.json(),
-    await newsResponse.json(),
-  ]);
-
-  console.log("Custome name: " + customer.name);
-  console.log(products.length + " products");
-  console.log(news.length + " news items");
-}
-
-loadData();

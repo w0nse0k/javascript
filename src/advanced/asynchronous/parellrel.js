@@ -10,23 +10,29 @@ const urls = [
 ];
 
 // Sequential Operations
-async function loadData() {
-  const result = [];
+async function loadDataSequential() {
+  console.time("loadDataSequential()");
+  const results = [];
   for (const url of urls) {
     const response = await fetch(url);
     const json = await response.json();
-    result.push(json);
+    results.push(json);
   }
-  console.log(JSON.stringify(result));
-  console.log("loadData() 완료");
+  console.log("loadDataSequential()", JSON.stringify(results));
+  console.timeEnd("loadDataSequential()");
 }
-loadData();
+loadDataSequential();
 
 // Promise.all()
-async function loadData2() {
-  const responses = await Promise.all(urls.map((url) => fetch(url)));
-  const data = await Promise.all(responses.map((response) => response.json()));
-  console.log(JSON.stringify(data));
-  console.log("loadData2() 완료");
+async function loadDataParellel() {
+  console.time("loadDataParellel()");
+  const data = await Promise.all(
+    urls.map(async (url) => {
+      const response = await fetch(url);
+      return response.json();
+    }),
+  );
+  console.log("loadDataParellel()", JSON.stringify(data));
+  console.timeEnd("loadDataParellel()");
 }
-loadData2();
+loadDataParellel();
