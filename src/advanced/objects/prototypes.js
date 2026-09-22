@@ -33,6 +33,3 @@ const prototype2 = Object.getPrototypeOf(myMother);
 
 console.log(prototype1 === prototype2);
 console.log(prototype1 === Person.prototype);
-
-console.log(Person.prototype.constructor === Person);
-console.log(myFather.constructor === Person);

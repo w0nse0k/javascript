@@ -1,5 +1,6 @@
 /**
  * <h3>constructor function: Statistics</h3>
+ * @module
  */
 function Statistis(arr) {
   this.data = arr;
