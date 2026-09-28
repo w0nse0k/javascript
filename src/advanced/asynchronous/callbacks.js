@@ -23,14 +23,3 @@ console.log(result);
 const display = () => console.log("Finished!");
 setTimeout(display, 1000);
 console.log("continue...");
-
-// Callback chains
-setTimeout(function () {
-  console.log("Task A finished.");
-  setTimeout(function () {
-    console.log("Task B finished.");
-    setTimeout(function () {
-      console.log("Task C finished.");
-    }, 1000);
-  }, 2000);
-}, 3000);

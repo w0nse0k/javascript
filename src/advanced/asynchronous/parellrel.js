@@ -11,28 +11,28 @@ const urls = [
 
 // Sequential Operations
 async function loadDataSequential() {
-  console.time("loadDataSequential()");
+  console.time("loadDataSequential");
   const results = [];
   for (const url of urls) {
     const response = await fetch(url);
     const json = await response.json();
     results.push(json);
   }
-  console.log("loadDataSequential()", JSON.stringify(results));
-  console.timeEnd("loadDataSequential()");
+  console.log("loadDataSequential", JSON.stringify(results));
+  console.timeEnd("loadDataSequential");
 }
 loadDataSequential();
 
 // Promise.all()
 async function loadDataParellel() {
-  console.time("loadDataParellel()");
+  console.time("loadDataParellel");
   const data = await Promise.all(
     urls.map(async (url) => {
       const response = await fetch(url);
       return response.json();
     }),
   );
-  console.log("loadDataParellel()", JSON.stringify(data));
-  console.timeEnd("loadDataParellel()");
+  console.log("loadDataParellel", JSON.stringify(data));
+  console.timeEnd("loadDataParellel");
 }
 loadDataParellel();

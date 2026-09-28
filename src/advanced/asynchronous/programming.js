@@ -11,7 +11,6 @@ function wait() {
 // synchronous (blocking)
 wait();
 console.log("Done!");
-console.log("Another process");
 
 // asynchronous (non-blocking)
 setTimeout(() => console.log("2 senconds past. Done."), 2000);
