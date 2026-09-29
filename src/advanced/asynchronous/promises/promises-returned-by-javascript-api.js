@@ -4,9 +4,14 @@
  * @see https://www.w3schools.com/js/js_async_promises.asp
  */
 fetch("https://www.w3schools.com/js/fetch.txt")
-  .then((response) => response.text())
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`${response.status}, ${response.statusText}`);
+    }
+    return response.text();
+  })
   .then((text) => console.log(text))
-  .catch((error) => console.error(error))
+  .catch((error) => console.error(error.message))
   .finally(() => console.log("Finished."));
 
-console.log("JavaScript continues");
+console.log("JavaScript continues...");
